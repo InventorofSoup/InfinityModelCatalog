@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infinity Master Collection Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>Infinity Master Collection Tracker</h1>
+  <div class="progress" id="progress"></div>
+</header>
+
+<div class="backup-note" id="backupNote">
+  <span id="backupNoteText"></span>
+  <button type="button" id="backupNoteClose" aria-label="Dismiss">&times;</button>
+</div>
+
+<div class="controls">
+  <input type="search" id="search" placeholder="Search unit, sculpt, weapon, notes…">
+  <div class="chipgroup" id="factionChips"></div>
+  <div class="chipgroup" id="statusChips"></div>
+  <div class="chipgroup" id="ownedChips">
+    <button class="chip active" data-owned="all">All</button>
+    <button class="chip" data-owned="owned">Owned</button>
+    <button class="chip" data-owned="missing">Missing</button>
+  </div>
+  <label class="toggle"><input type="checkbox" id="avaToggle"> Show AVA warnings</label>
+  <label class="toggle"><input type="checkbox" id="mercToggle"> Hide mercenary guests</label>
+  <div class="io">
+    <button id="addBtn">+ Add model</button>
+    <button id="exportBtn" title="Full backup (JSON)">Export progress</button>
+    <button id="exportCsvBtn" title="Spreadsheet-friendly (CSV)">Export CSV</button>
+    <label class="importLabel">Import progress<input type="file" id="importInput" accept=".json,.csv,application/json,text/csv"></label>
+  </div>
+</div>
+
+<main>
+  <section id="unitListView">
+    <div id="unitGrid" class="grid"></div>
+  </section>
+
+  <section id="unitDetailView" class="hidden">
+    <div class="unit-header">
+      <button id="backBtn" class="back-btn">&#8249; All units</button>
+      <div class="unit-header-info">
+        <h2 id="unitTitle"></h2>
+        <div id="unitProgress" class="unit-progress"></div>
+      </div>
+    </div>
+    <div id="modelList" class="model-list"></div>
+  </section>
+</main>
+
+<div id="lightbox" class="lightbox hidden">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
+<div id="addModal" class="modal-overlay hidden">
+  <form id="addForm" class="modal">
+    <h2>Add a new model</h2>
+    <label>Unit name <input type="text" id="f-unit" required></label>
+    <label>Sculpt / release label <input type="text" id="f-sculpt" placeholder="e.g. 03 New Release"></label>
+    <label>Weapon / loadout <input type="text" id="f-weapon"></label>
+    <div class="field-label">Faction(s)</div>
+    <div class="chipgroup" id="f-factions"></div>
+    <label>Other faction tag <input type="text" id="f-faction-other" placeholder="comma-separated, optional"></label>
+    <label>Status
+      <select id="f-status">
+        <option>Current / released</option>
+        <option>Limited / special</option>
+        <option>Out of print</option>
+      </select>
+    </label>
+    <label>Notes <textarea id="f-notes" rows="2"></textarea></label>
+    <label>Source / Human Sphere link <input type="url" id="f-hspage"></label>
+    <label>Image <input type="file" id="f-image" accept="image/*"></label>
+    <div class="modal-actions">
+      <button type="button" id="addCancel">Cancel</button>
+      <button type="submit">Add model</button>
+    </div>
+  </form>
+</div>
+
+<div id="editModal" class="modal-overlay hidden">
+  <form id="editForm" class="modal">
+    <h2>Edit model details</h2>
+    <label>Unit name <input type="text" id="e-unit" required></label>
+    <label>Sculpt / release label <input type="text" id="e-sculpt"></label>
+    <label>Weapon / loadout <input type="text" id="e-weapon"></label>
+    <div class="field-label">Faction(s)</div>
+    <div class="chipgroup" id="e-factions"></div>
+    <label>Other faction tag <input type="text" id="e-faction-other" placeholder="comma-separated, optional"></label>
+    <label>Status
+      <select id="e-status">
+        <option>Current / released</option>
+        <option>Limited / special</option>
+        <option>Out of print</option>
+      </select>
+    </label>
+    <label>Notes <textarea id="e-notes" rows="2"></textarea></label>
+    <label>Source / Human Sphere link <input type="url" id="e-hspage"></label>
+    <label>Replace image (optional) <input type="file" id="e-image" accept="image/*"></label>
+    <div class="modal-actions">
+      <button type="button" id="editReset">Reset to original</button>
+      <button type="button" id="editCancel">Cancel</button>
+      <button type="submit">Save changes</button>
+    </div>
+  </form>
+</div>
+
+<footer class="site-credit">
+  Unofficial fan-made collection tracker. <b>Infinity</b> and all related miniatures, names, artwork and
+  product photographs are the property of <b>Corvus Belli S.L.L.</b> All photos are credited to Corvus Belli
+  (via <a href="https://human-sphere.com" target="_blank" rel="noopener">Human Sphere</a>); the maintainer of
+  this site does not own the images and claims no rights to them. This site is not affiliated with or endorsed
+  by Corvus Belli. Your collection data stays in your own browser.
+</footer>
+
+<script src="catalog_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

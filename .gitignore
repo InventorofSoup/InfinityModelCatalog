@@ -1,0 +1,10 @@
+# Private / working files - never publish
+*.xlsx
+/catalog_data.js
+_incoming/
+_stage*/
+/REVIEW_NOTES.md
+__pycache__/
+/images/
+/extract.py
+/supplemental_models.json
